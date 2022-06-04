@@ -80,6 +80,7 @@ class Major(models.Model):
 
 class Tag(models.Model):
     """Tag for filtering events."""
+
     name = models.CharField(max_length=255)
 
     def __str__(self):
@@ -122,16 +123,15 @@ class Event(models.Model):
     )
     capacity = models.IntegerField(verbose_name=_("capacity"))
     majors = models.ManyToManyField(
-        'Major',
+        "Major",
         related_name="events",
         verbose_name=_("majors"),
     )
     tags = models.ManyToManyField(
-        'Tag',
-        related_name='events',
-        verbose_name=_('tags'),
+        "Tag",
+        related_name="events",
+        verbose_name=_("tags"),
     )
-    
 
     def is_ready_to_publish(self):
         """Return true if event is ready to be published."""
