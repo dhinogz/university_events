@@ -78,6 +78,14 @@ class Major(models.Model):
         return self.name
 
 
+class Tag(models.Model):
+    """Tag for filtering events."""
+    name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
+
+
 class Event(models.Model):
     """Event object."""
 
@@ -113,10 +121,15 @@ class Event(models.Model):
         verbose_name=_("venue"),
     )
     capacity = models.IntegerField(verbose_name=_("capacity"))
-    major = models.ManyToManyField(
+    majors = models.ManyToManyField(
         'Major',
         related_name="events",
-        verbose_name=_("major"),
+        verbose_name=_("majors"),
+    )
+    tags = models.ManyToManyField(
+        'Tag',
+        related_name='events',
+        verbose_name=_('tags'),
     )
     
 

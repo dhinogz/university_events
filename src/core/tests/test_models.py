@@ -5,7 +5,7 @@ Test for models.
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 
-from core.models import Event, Area, Major
+from core.models import Event, Area, Major, Tag
 
 from datetime import date, datetime, time
 
@@ -76,15 +76,17 @@ class ModelTests(TestCase):
 
     def test_create_major(self):
         """Test creating a major is successful."""
-        major1 = Major.objects.create(
+        major = Major.objects.create(
             name='ITC',
             slug='itc',
         )
-        major2 = Major.objects.create(
-            name='ITD',
-            slug='itd',
-        )
 
-        self.assertEqual(major1.name, str(major1))
-        self.assertEqual(major2.name, str(major2))
+        self.assertEqual(major.name, str(major))
+
+    def test_create_tag(self):
+        """Test creating a tag is successful."""
+        tag = Tag.objects.create(name='Tag1')
+
+        self.assertEqual(str(tag), tag.name)
+
         
